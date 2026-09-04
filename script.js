@@ -56,8 +56,8 @@ const header = document.getElementById('siteHeader');
     });
   }
 
-  // Scroll-reveal fade-in for experimental background-photo sections
-  const revealEls = document.querySelectorAll('.reveal-on-scroll');
+  // Scroll-reveal fade-in (single elements) + staggered entrance (card/grid groups)
+  const revealEls = document.querySelectorAll('.reveal-on-scroll, .reveal-stagger');
   if (revealEls.length && 'IntersectionObserver' in window) {
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -70,4 +70,24 @@ const header = document.getElementById('siteHeader');
     revealEls.forEach(el => revealObserver.observe(el));
   } else {
     revealEls.forEach(el => el.classList.add('is-visible'));
+  }
+
+  // Subtle magnetic pull on the hero's primary CTA only — one focal element, not a
+  // page-wide effect. Skipped entirely for touch (no hover) and reduced-motion users.
+  const magneticCta = document.querySelector('.hero-cta-glow');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const supportsHover = window.matchMedia('(hover: hover)').matches;
+  if (magneticCta && !prefersReducedMotion && supportsHover) {
+    // Note: this sets an inline transform, which takes over from the CSS
+    // .btn-gold:hover translateY(-2px) lift for this element — so the -2px
+    // lift is folded into the y offset here to keep that feel while hovered.
+    magneticCta.addEventListener('mousemove', (e) => {
+      const r = magneticCta.getBoundingClientRect();
+      const x = (e.clientX - r.left - r.width / 2) * 0.25;
+      const y = (e.clientY - r.top - r.height / 2) * 0.25 - 2;
+      magneticCta.style.transform = `translate(${x}px, ${y}px)`;
+    });
+    magneticCta.addEventListener('mouseleave', () => {
+      magneticCta.style.transform = '';
+    });
   }
