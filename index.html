@@ -62,6 +62,7 @@
 </head>
 <body>
 
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 <header id="siteHeader">
   <div class="wrap">
     <nav>
@@ -142,7 +143,9 @@
     <div class="about-grid reveal-on-scroll">
       <div class="about-media">
         <div class="frame"></div>
-        <img src="images/Axford-44.jpg" alt="Lisa Axford standing above the coastline">
+        <div class="about-media-clip img-reveal-trigger">
+          <img class="img-reveal" src="images/Axford-44.jpg" alt="Lisa Axford standing above the coastline">
+        </div>
       </div>
       <div class="about-copy">
         <span class="eyebrow">The journey that led me here</span>
@@ -150,10 +153,10 @@
         <p>For over twenty-five years, Lisa led supply chain and operations teams through some of the highest-pressure environments in global business — multi-million-dollar budgets, cross-continental teams, and the kind of change that would rattle most people.</p>
         <p>Long before that, she was a yacht skipper, navigating two Trans-Atlantic crossings and training crews to sail through open water, uncertainty, and the occasional hurricane-force wind.</p>
         <p>What she learned in both worlds is the same: real transformation isn't about the destination, it's about learning to read your own compass again. Today she combines that leadership experience with her passion for personal transformation, helping women remember their strength, embrace intentional change, and create lives they truly love.</p>
-        <div class="stat-row">
-          <div class="stat"><div class="num">25+</div><div class="label">Years Leading Through Change</div></div>
-          <div class="stat"><div class="num">2</div><div class="label">Ocean Crossings</div></div>
-          <div class="stat"><div class="num">1</div><div class="label">Program Built to Guide You Home</div></div>
+        <div class="stat-row reveal-stagger">
+          <div class="stat"><div class="num" data-count="25" data-suffix="+">25+</div><div class="label">Years Leading Through Change</div></div>
+          <div class="stat"><div class="num" data-count="2">2</div><div class="label">Ocean Crossings</div></div>
+          <div class="stat"><div class="num" data-count="1">1</div><div class="label">Program Built to Guide You Home</div></div>
         </div>
       </div>
     </div>
@@ -361,9 +364,9 @@
 -->
 
 <div class="band reveal-stagger">
-  <div class="band-item"><img src="images/band-wind.jpg" alt="Lisa Axford"><div class="cap">"You can't control the wind —</div></div>
-  <div class="band-item"><img src="images/band-sails.jpg" alt="Lisa Axford walking the beach at sunset"><div class="cap">but you can adjust your sails."</div></div>
-  <div class="band-item"><img src="images/band-decision.jpg" alt="Lisa Axford laughing on the beach"><div class="cap">One decision at a time.</div></div>
+  <div class="band-item img-reveal-trigger"><img class="img-reveal" src="images/band-wind.jpg" alt="Lisa Axford"><div class="cap">"You can't control the wind —</div></div>
+  <div class="band-item img-reveal-trigger"><img class="img-reveal" src="images/band-sails.jpg" alt="Lisa Axford walking the beach at sunset"><div class="cap">but you can adjust your sails."</div></div>
+  <div class="band-item img-reveal-trigger"><img class="img-reveal" src="images/band-decision.jpg" alt="Lisa Axford laughing on the beach"><div class="cap">One decision at a time.</div></div>
 </div>
 
 <!-- Stories of Transformation section removed until real client testimonials are available.

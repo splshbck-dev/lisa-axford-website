@@ -39,7 +39,9 @@
   .eyebrow{
     font-family:var(--sans); font-size:12.5px; letter-spacing:3.5px; text-transform:uppercase;
     font-weight:600; color:var(--gold-deep);
+    position:relative; display:inline-block; padding-bottom:14px;
   }
+  .eyebrow::after{ content:''; position:absolute; left:0; bottom:0; width:30px; height:2px; background:var(--gold-bright); }
   .btn{
     display:inline-flex; align-items:center; gap:10px;
     padding:16px 34px; border-radius:2px; font-family:var(--sans); font-size:13.5px;
@@ -48,14 +50,31 @@
     cursor:pointer; border:1px solid transparent;
     white-space:nowrap;
   }
-  .btn-gold{ background:var(--gold-bright); color:var(--navy-deep); }
+  .btn-gold{ background:var(--gold-bright); color:var(--navy-deep); position:relative; overflow:hidden; }
   .btn-gold:hover{ background:#e6bc3a; transform:translateY(-2px); box-shadow:0 10px 24px rgba(199,154,43,0.28); }
   .btn-gold:active{ transform:translateY(0); box-shadow:0 4px 12px rgba(199,154,43,0.28); }
+  .btn-gold::before{
+    content:''; position:absolute; top:0; left:-60%; width:35%; height:100%;
+    background:linear-gradient(120deg, transparent, rgba(255,255,255,0.55), transparent);
+    transform:skewX(-20deg); transition:left .6s var(--ease-out-soft); pointer-events:none;
+  }
+  .btn-gold:hover::before{ left:130%; }
+  @media (prefers-reduced-motion: reduce){
+    .btn-gold::before{ display:none; }
+  }
   .btn-outline{ background:transparent; border:1px solid rgba(255,255,255,0.4); color:#fff; }
   .btn-outline:hover{ border-color:var(--gold-bright); color:var(--gold-bright); }
   .btn-navy{ background:var(--navy-deep); color:var(--cream); }
   .btn-navy:hover{ background:var(--navy-soft); transform:translateY(-2px); }
   .btn:focus-visible{ outline:2px solid var(--gold-bright); outline-offset:3px; }
+
+  /* SCROLL PROGRESS BAR — directly mirrors the user's own scroll position (not
+     independent decorative motion), so it stays active under reduced-motion too. */
+  .scroll-progress{
+    position:fixed; top:0; left:0; width:100%; height:3px; z-index:110;
+    background:var(--gold-bright); transform:scaleX(0); transform-origin:0 50%;
+    will-change:transform;
+  }
 
   /* NAV */
   header{
@@ -78,6 +97,8 @@
   .nav-links a{ transition:color .3s var(--ease-out); }
   .nav-links a:hover{ color:#fff; }
   .nav-links a:hover::after{ width:100%; }
+  .nav-links a.active{ color:#fff; }
+  .nav-links a.active::after{ width:100%; }
   .nav-cta{ display:flex; align-items:center; gap:20px; }
   .nav-cta .btn{
     padding:11px 22px; font-size:11.5px; letter-spacing:1.4px; border-radius:20px;
@@ -151,7 +172,9 @@
   .about{ background:var(--cream); }
   .about-grid{ display:grid; grid-template-columns:0.85fr 1.15fr; gap:90px; align-items:center; }
   .about-media{ position:relative; }
+  .about-media-clip{ overflow:hidden; }
   .about-media img{ width:100%; height:640px; object-fit:cover; object-position:top center; }
+  .about-media-clip:hover img{ transform:scale(1.03); }
   .about-media .frame{
     position:absolute; top:24px; left:-24px; right:24px; bottom:-24px; border:1px solid var(--gold);
     z-index:-1;
@@ -287,6 +310,14 @@
   .bg-photo{
     position:absolute; inset:0; background-size:cover; background-position:center 35%;
     background-attachment:scroll; z-index:0;
+    animation:kenBurns 22s ease-in-out infinite alternate; will-change:transform;
+  }
+  @keyframes kenBurns{
+    0%{ transform:scale(1); }
+    100%{ transform:scale(1.08); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .bg-photo{ animation:none; }
   }
   .bg-photo-overlay{
     position:absolute; inset:0; z-index:1;
@@ -337,9 +368,32 @@
   .js .reveal-stagger > *:nth-child(7){ transition-delay:360ms; }
   .js .reveal-stagger > *:nth-child(n+8){ transition-delay:420ms; }
 
+  /* Clip-path wipe reveal for photography — a more dynamic entrance than a plain fade.
+     Note: this selector out-specifies .band-item img's own transition rule, so the
+     transform transition those images use for their hover-zoom is repeated here too —
+     otherwise this rule would silently win the cascade and drop it.
+     The trigger for "is-visible" lives on an unclipped wrapper (.img-reveal-trigger),
+     not on the clipped <img> itself: an element clipped to zero area by its own
+     clip-path is reported by IntersectionObserver as permanently non-intersecting
+     (ratio 0) even once scrolled fully into view, so it could never trigger its own
+     reveal — verified directly against this Chromium build. */
+  .js .img-reveal{
+    clip-path:inset(0 100% 0 0);
+    transition:clip-path 1s var(--ease-out-soft), transform .8s var(--ease-out-soft);
+  }
+  .js .img-reveal-trigger.is-visible .img-reveal{ clip-path:inset(0 0 0 0); }
+
   @media (prefers-reduced-motion: reduce){
     .js .reveal-on-scroll, .js .reveal-stagger > *{ opacity:1 !important; transform:none !important; transition:none !important; }
+    .js .img-reveal{ clip-path:none !important; transition:none !important; }
   }
+
+  /* Word-level headline reveal — script.js wraps each word of a handful of short
+     headings in .word > .word-inner at runtime (skipped under reduced-motion, so
+     the source text is never altered for those users, no-JS visitors, or crawlers). */
+  .split-heading .word{ display:inline-block; overflow:hidden; vertical-align:top; padding-bottom:0.08em; margin-bottom:-0.08em; }
+  .split-heading .word-inner{ display:inline-block; transform:translateY(115%); transition:transform .7s var(--ease-out-soft); }
+  .split-heading.is-visible .word-inner{ transform:translateY(0); }
 
   @media (max-width:900px){
     .bg-photo{ background-attachment:scroll; }
@@ -467,7 +521,8 @@
   .offer-cards{ display:grid; grid-template-columns:repeat(2,1fr); gap:32px; }
   .offer-card{
     background:#fff; border:1px solid var(--line); padding:40px 32px; text-align:center; border-radius:2px;
-    transition:transform .35s var(--ease-out), box-shadow .35s var(--ease-out), border-color .35s var(--ease-out);
+    transition:transform .15s ease-out, box-shadow .35s var(--ease-out), border-color .35s var(--ease-out);
+    will-change:transform;
   }
   .offer-card:hover{ transform:translateY(-6px); box-shadow:0 20px 40px rgba(10,20,36,0.1); border-color:var(--gold-bright); }
   .offer-card h4{ font-size:23px; color:var(--navy-deep); margin-bottom:14px; }
@@ -513,7 +568,16 @@
   .packages-note{ text-align:center; color:rgba(244,239,228,0.55); font-size:13.5px; font-style:italic; margin-top:36px; }
 
   /* SIGNATURE FRAMEWORK (draft) */
-  .framework{ background:var(--navy-deep); }
+  .framework{ background:var(--navy-deep); position:relative; overflow:hidden; }
+  .framework::before{
+    content:''; position:absolute; width:520px; height:520px; border-radius:50%;
+    border:1px solid rgba(199,154,43,0.14); top:-260px; left:-180px; pointer-events:none;
+  }
+  .framework::after{
+    content:''; position:absolute; width:380px; height:380px; border-radius:50%;
+    border:1px solid rgba(199,154,43,0.12); bottom:-220px; right:-140px; pointer-events:none;
+  }
+  .framework .wrap{ position:relative; z-index:1; }
   .framework .eyebrow{ color:var(--gold-bright); }
   .framework h2{ color:#fdfaf3; font-size:clamp(30px,4vw,44px); margin:16px 0 14px; }
   .framework .lede{ color:rgba(244,239,228,0.75); max-width:560px; margin:0 auto; font-weight:300; font-size:15.5px; }
@@ -521,7 +585,8 @@
   .framework-item{
     display:flex; flex-direction:column; align-items:center; text-align:center; padding:26px 18px;
     border:1px solid rgba(199,154,43,0.25); border-radius:2px;
-    transition:transform .35s var(--ease-out), border-color .35s var(--ease-out), background .35s var(--ease-out);
+    transition:transform .15s ease-out, border-color .35s var(--ease-out), background .35s var(--ease-out);
+    will-change:transform;
   }
   .framework-item:hover{ transform:translateY(-4px); border-color:var(--gold-bright); background:rgba(199,154,43,0.06); }
   .framework-letter{ font-family:var(--serif); font-size:40px; color:var(--gold-bright); font-weight:600; line-height:1; margin-bottom:10px; }
