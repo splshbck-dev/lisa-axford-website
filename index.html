@@ -252,21 +252,97 @@
 <!-- Signature Framework — approved by Lisa. -->
 <section class="framework section-pad" id="framework">
   <div class="wrap reveal-on-scroll">
-    <div class="kicker-block center">
-      <span class="eyebrow">The Emergence Program</span>
-      <h2>The EMERGENCE Framework</h2>
-      <p class="lede">Her signature framework — a guided path through real, lasting transformation.</p>
-    </div>
-    <div class="framework-grid reveal-stagger">
-      <div class="framework-item"><span class="framework-letter">E</span><span class="framework-word">Explore</span><span class="framework-desc">Get honest about where you really are.</span></div>
-      <div class="framework-item"><span class="framework-letter">M</span><span class="framework-word">Mindset</span><span class="framework-desc">Rewire the beliefs that have been running the show.</span></div>
-      <div class="framework-item"><span class="framework-letter">E</span><span class="framework-word">Embrace</span><span class="framework-desc">Own your story and your strengths, fully.</span></div>
-      <div class="framework-item"><span class="framework-letter">R</span><span class="framework-word">Realign</span><span class="framework-desc">Bring your choices back in line with who you are.</span></div>
-      <div class="framework-item"><span class="framework-letter">G</span><span class="framework-word">Grow</span><span class="framework-desc">Build momentum through consistent, supported action.</span></div>
-      <div class="framework-item"><span class="framework-letter">E</span><span class="framework-word">Elevate</span><span class="framework-desc">Raise your standards, and your self-image with them.</span></div>
-      <div class="framework-item"><span class="framework-letter">N</span><span class="framework-word">Nurture</span><span class="framework-desc">Care for yourself the way you've always cared for everyone else.</span></div>
-      <div class="framework-item"><span class="framework-letter">C</span><span class="framework-word">Continuous</span><span class="framework-desc">Treat progress as a practice, not a one-time fix.</span></div>
-      <div class="framework-item"><span class="framework-letter">E</span><span class="framework-word">Evolution</span><span class="framework-desc">Keep becoming — growth doesn't stop at "better."</span></div>
+    <div class="framework-layout">
+      <div class="framework-intro">
+        <span class="eyebrow">The Emergence Program</span>
+        <h2>The EMERGENCE Framework</h2>
+        <p class="lede">Her signature framework — a guided path through real, lasting transformation. Select a letter to explore each step.</p>
+        <div class="framework-picker">
+          <button type="button" class="framework-pick is-active" aria-pressed="true" data-index="0">E<span class="visually-hidden"> — Explore</span></button>
+          <button type="button" class="framework-pick" aria-pressed="false" data-index="1">M<span class="visually-hidden"> — Mindset</span></button>
+          <button type="button" class="framework-pick" aria-pressed="false" data-index="2">E<span class="visually-hidden"> — Embrace</span></button>
+          <button type="button" class="framework-pick" aria-pressed="false" data-index="3">R<span class="visually-hidden"> — Realign</span></button>
+          <button type="button" class="framework-pick" aria-pressed="false" data-index="4">G<span class="visually-hidden"> — Grow</span></button>
+          <button type="button" class="framework-pick" aria-pressed="false" data-index="5">E<span class="visually-hidden"> — Elevate</span></button>
+          <button type="button" class="framework-pick" aria-pressed="false" data-index="6">N<span class="visually-hidden"> — Nurture</span></button>
+          <button type="button" class="framework-pick" aria-pressed="false" data-index="7">C<span class="visually-hidden"> — Continuous</span></button>
+          <button type="button" class="framework-pick" aria-pressed="false" data-index="8">E<span class="visually-hidden"> — Evolution</span></button>
+        </div>
+      </div>
+      <div class="framework-detail" aria-live="polite">
+        <div class="framework-panel is-active" data-index="0">
+          <span class="framework-panel-letter">E</span>
+          <div>
+            <h3 class="framework-panel-word">Explore</h3>
+            <span class="framework-panel-step">Step 1 of 9</span>
+            <p class="framework-panel-desc">Get honest about where you really are.</p>
+          </div>
+        </div>
+        <div class="framework-panel" data-index="1" hidden>
+          <span class="framework-panel-letter">M</span>
+          <div>
+            <h3 class="framework-panel-word">Mindset</h3>
+            <span class="framework-panel-step">Step 2 of 9</span>
+            <p class="framework-panel-desc">Rewire the beliefs that have been running the show.</p>
+          </div>
+        </div>
+        <div class="framework-panel" data-index="2" hidden>
+          <span class="framework-panel-letter">E</span>
+          <div>
+            <h3 class="framework-panel-word">Embrace</h3>
+            <span class="framework-panel-step">Step 3 of 9</span>
+            <p class="framework-panel-desc">Own your story and your strengths, fully.</p>
+          </div>
+        </div>
+        <div class="framework-panel" data-index="3" hidden>
+          <span class="framework-panel-letter">R</span>
+          <div>
+            <h3 class="framework-panel-word">Realign</h3>
+            <span class="framework-panel-step">Step 4 of 9</span>
+            <p class="framework-panel-desc">Bring your choices back in line with who you are.</p>
+          </div>
+        </div>
+        <div class="framework-panel" data-index="4" hidden>
+          <span class="framework-panel-letter">G</span>
+          <div>
+            <h3 class="framework-panel-word">Grow</h3>
+            <span class="framework-panel-step">Step 5 of 9</span>
+            <p class="framework-panel-desc">Build momentum through consistent, supported action.</p>
+          </div>
+        </div>
+        <div class="framework-panel" data-index="5" hidden>
+          <span class="framework-panel-letter">E</span>
+          <div>
+            <h3 class="framework-panel-word">Elevate</h3>
+            <span class="framework-panel-step">Step 6 of 9</span>
+            <p class="framework-panel-desc">Raise your standards, and your self-image with them.</p>
+          </div>
+        </div>
+        <div class="framework-panel" data-index="6" hidden>
+          <span class="framework-panel-letter">N</span>
+          <div>
+            <h3 class="framework-panel-word">Nurture</h3>
+            <span class="framework-panel-step">Step 7 of 9</span>
+            <p class="framework-panel-desc">Care for yourself the way you've always cared for everyone else.</p>
+          </div>
+        </div>
+        <div class="framework-panel" data-index="7" hidden>
+          <span class="framework-panel-letter">C</span>
+          <div>
+            <h3 class="framework-panel-word">Continuous</h3>
+            <span class="framework-panel-step">Step 8 of 9</span>
+            <p class="framework-panel-desc">Treat progress as a practice, not a one-time fix.</p>
+          </div>
+        </div>
+        <div class="framework-panel" data-index="8" hidden>
+          <span class="framework-panel-letter">E</span>
+          <div>
+            <h3 class="framework-panel-word">Evolution</h3>
+            <span class="framework-panel-step">Step 9 of 9</span>
+            <p class="framework-panel-desc">Keep becoming — growth doesn't stop at "better."</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>

@@ -219,6 +219,34 @@
     }
   }
 
+  // EMERGENCE Framework letter picker — click a letter to swap the detail panel.
+  const frameworkPicks = document.querySelectorAll('.framework-pick');
+  const frameworkPanels = document.querySelectorAll('.framework-panel');
+  if (frameworkPicks.length && frameworkPanels.length) {
+    frameworkPicks.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const index = btn.getAttribute('data-index');
+        if (btn.classList.contains('is-active')) return;
+        frameworkPicks.forEach((b) => {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-pressed', 'true');
+        frameworkPanels.forEach((panel) => {
+          const isMatch = panel.getAttribute('data-index') === index;
+          panel.hidden = !isMatch;
+          panel.classList.remove('is-entering');
+          if (isMatch && !prefersReducedMotion) {
+            // Re-trigger the entrance animation even if this panel was shown before.
+            void panel.offsetWidth;
+            panel.classList.add('is-entering');
+          }
+        });
+      });
+    });
+  }
+
   // Subtle 3D tilt on grid cards, tracking the pointer. Desktop/hover only;
   // reduced-motion and touch devices keep the plain CSS lift-on-hover instead.
   if (!prefersReducedMotion && supportsHover) {
