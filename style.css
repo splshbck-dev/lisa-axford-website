@@ -269,18 +269,32 @@
     border:1px solid rgba(199,154,43,0.12); bottom:-260px; left:-160px;
   }
   .cta-banner .script{ font-family:var(--serif); font-style:italic; font-weight:500; color:var(--gold-bright); font-size:26px; letter-spacing:0.5px; display:block; margin-bottom:10px; }
-  .cta-banner h2{ color:#fdfaf3; font-size:clamp(32px,5vw,54px); margin-bottom:34px; max-width:760px; margin-left:auto; margin-right:auto; }
+  .cta-banner h2{ color:#fdfaf3; font-size:clamp(32px,5vw,54px); margin-bottom:22px; }
+
+  /* Two-column layout: reassurance copy left, scheduler right — replaces the
+     previous fully-centered stack, which left a lot of bare navy on either
+     side of the calendar widget on wide screens. */
+  .cta-layout{
+    display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;
+    text-align:left; position:relative; z-index:2;
+  }
+  .cta-reassure{ color:rgba(244,239,228,0.78); font-size:16px; font-weight:300; line-height:1.6; max-width:440px; margin-bottom:26px; }
+  .cta-points{ list-style:none; padding:0; margin:0; max-width:420px; }
+  .cta-points li{
+    position:relative; padding-left:22px; margin-bottom:13px;
+    color:rgba(244,239,228,0.82); font-size:15px; font-weight:300; line-height:1.5;
+  }
+  .cta-points li::before{ content:'—'; position:absolute; left:0; color:var(--gold-bright); font-weight:600; }
 
   /* LIVE ZOOM SCHEDULER EMBED */
   .scheduler-live{
-    position:relative; z-index:2; max-width:750px; margin:20px auto 0;
+    position:relative; z-index:2;
     background:#fdfaf3; border-radius:6px; overflow:hidden; box-shadow:0 30px 60px rgba(0,0,0,0.35);
   }
   .scheduler-live iframe{
     display:block; width:100%; height:560px; border:none;
   }
   @media (max-width:820px){
-    .scheduler-live{ max-width:100%; }
     .scheduler-live iframe{ height:620px; }
   }
   @media (max-width:520px){
@@ -415,6 +429,9 @@
   @media (max-width: 900px){
     .pain-grid, .about-grid{ grid-template-columns:1fr; gap:50px; }
     .pillars{ grid-template-columns:1fr; gap:30px; }
+    .cta-layout{ grid-template-columns:1fr; gap:36px; text-align:center; }
+    .cta-reassure{ margin-left:auto; margin-right:auto; }
+    .cta-points{ margin-left:auto; margin-right:auto; text-align:left; }
     .about-media img{ height:420px; }
     .quote-card:nth-child(2){ margin-left:0; }
     .route{ grid-template-columns:1fr; gap:60px; }
