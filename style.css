@@ -614,6 +614,8 @@
     font-weight:600; margin-bottom:18px; padding-bottom:14px; border-bottom:1px solid rgba(199,154,43,0.25);
   }
   .framework-panel-desc{ color:rgba(244,239,228,0.78); font-size:16px; font-weight:300; line-height:1.6; max-width:380px; }
+  .framework-panel-icon{ margin-top:26px; color:var(--gold-bright); opacity:0.85; }
+  .framework-panel-icon svg{ width:38px; height:38px; display:block; }
   .framework-panel.is-entering{ animation:frameworkPanelIn .5s var(--ease-out-soft); }
   @keyframes frameworkPanelIn{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:translateY(0); } }
   @media (prefers-reduced-motion: reduce){
