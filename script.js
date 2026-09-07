@@ -193,7 +193,15 @@
       });
     };
 
-    const headlineEls = document.querySelectorAll('.hero h1, .kicker-block h2, .about-copy h2, .cta-banner h2');
+    // Skip any heading whose ancestor already has its own block-level fade
+    // (.reveal-on-scroll / .reveal-stagger — used by the full-bleed photo
+    // sections: hero, philosophy, program, plus about and framework). Layering
+    // a second, independently-timed word animation on top of that fade made
+    // the heading pop in a beat late instead of rising with the rest of the
+    // text as one unified block, which read as the original fade being broken.
+    const headlineEls = Array.from(
+      document.querySelectorAll('.hero h1, .kicker-block h2, .about-copy h2, .cta-banner h2')
+    ).filter((el) => !el.closest('.reveal-on-scroll, .reveal-stagger'));
     if (headlineEls.length) {
       const headlineObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
